@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "167626989335",
+    "project_id": "softdrinks-inventory-631c5",
+    "storage_bucket": "softdrinks-inventory-631c5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167626989335:android:7ee94d7a82f453cfcee152",
+        "android_client_info": {
+          "package_name": "com.example.cokeinventory"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCeGLRsQLgVBluuIrfDO0q9pUKR6T-DBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
