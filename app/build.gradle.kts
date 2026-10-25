@@ -8,8 +8,17 @@ android {
     namespace = "com.example.cokeinventory"
     compileSdk = 37
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("release-keystore.jks")
+            storePassword = "drinkstock123"
+            keyAlias = "drinkstock"
+            keyPassword = "drinkstock123"
+        }
+    }
+
     defaultConfig {
-        applicationId = "com.example.cokeinventory"
+        applicationId = "com.drinkstock.inventory"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -20,6 +29,7 @@ android {
 
     buildTypes {
         release {
+            signingConfig = signingConfigs.getByName("release")
             optimization {
                 enable = false
             }

@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:167626989335:android:7ee94d7a82f453cfcee152",
         "android_client_info": {
-          "package_name": "com.example.cokeinventory"
+          "package_name": "com.drinkstock.inventory"
         }
       },
       "oauth_client": [],
