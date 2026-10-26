@@ -7,22 +7,36 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import java.io.ByteArrayOutputStream
 
+/**
+ * Ultra-Compact Image Compression for Firestore
+ *
+ * Optimizes photos down to ~5 KB - 12 KB to minimize Firestore storage usage,
+ * accelerate network load speeds, and prevent document size limits.
+ */
 object ImageUtils {
-    fun bitmapToBase64(bitmap: Bitmap): String {
+    fun bitmapToBase64(bitmap: Bitmap, maxDimension: Int = 180, quality: Int = 35): String {
         val byteArrayOutputStream = ByteArrayOutputStream()
-        // Resize bitmap to max 300px dimension and 50% JPEG quality to save KB storage size
-        val maxDim = 300
-        val scaled = if (bitmap.width > maxDim || bitmap.height > maxDim) {
+
+        // Calculate aspect ratio and scale down image to max 180px thumbnail
+        val scaledBitmap = if (bitmap.width > maxDimension || bitmap.height > maxDimension) {
             val aspect = bitmap.width.toFloat() / bitmap.height.toFloat()
-            if (aspect > 1) {
-                Bitmap.createScaledBitmap(bitmap, maxDim, (maxDim / aspect).toInt(), true)
+            if (aspect > 1f) {
+                Bitmap.createScaledBitmap(bitmap, maxDimension, (maxDimension / aspect).toInt().coerceAtLeast(1), true)
             } else {
-                Bitmap.createScaledBitmap(bitmap, (maxDim * aspect).toInt(), maxDim, true)
+                Bitmap.createScaledBitmap(bitmap, (maxDimension * aspect).toInt().coerceAtLeast(1), maxDimension, true)
             }
         } else {
             bitmap
         }
-        scaled.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream)
+
+        // Compress image using highly optimized JPEG compression (35% quality)
+        scaledBitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream)
+        
+        // Clean up scaled bitmap reference if a copy was created
+        if (scaledBitmap != bitmap) {
+            scaledBitmap.recycle()
+        }
+
         val byteArray = byteArrayOutputStream.toByteArray()
         return Base64.encodeToString(byteArray, Base64.NO_WRAP)
     }

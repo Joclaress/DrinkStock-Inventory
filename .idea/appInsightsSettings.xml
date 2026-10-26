@@ -22,7 +22,7 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.example.cokeinventory" />
+                  <option name="appId" value="com.drinkstock.inventory" />
                   <option name="mobileSdkAppId" value="1:167626989335:android:7ee94d7a82f453cfcee152" />
                   <option name="projectId" value="softdrinks-inventory-631c5" />
                   <option name="projectNumber" value="167626989335" />
